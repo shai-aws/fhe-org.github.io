@@ -28,19 +28,57 @@
 Applications and use cases showcasing FHE, latest first.
 
 
-## 2023
+<table>
+  <tr>
+ <th colspan="2" style="text-align: center">FHE Use Cases</th>  </tr>
 
-- [Encrypted Key-value Database using FHE](https://www.zama.ai/post/encrypted-key-value-database-using-homomorphic-encryption) by **Zama** on **Mar 16, 2023**
-- [Encrypted image filtering](https://huggingface.co/spaces/zama-fhe/encrypted_image_filtering) by **Zama** on **Feb 23, 2023**
-- [Private password checker](https://playground.blyss.dev/passwords) by **Blyss** on **Feb 21, 2023**
+  <tr>
+    <th style="text-align: center"> <a href="https://www.zama.ai/post/encrypted-key-value-database-using-homomorphic-encryption"> Encrypted Key-value Database using FHE <br/> <img src="/resources/cropped.png" width="20"/></a> March 16 2023 <br/>  by Zama  </th>
+    <td> <a href="https://www.zama.ai/post/encrypted-key-value-database-using-homomorphic-encryption"> <img src="/resources/kdv.png" width="300"/></a> </td>
+  </tr>  
 
-## 2022
-- [Sentiment analysis over encrypted data](https://huggingface.co/spaces/zama-fhe/encrypted_sentiment_analysis) by **Zama**  on **Nov 17, 2022**
-- [Private bitcoin balance](https://btc.usespiral.com/) by **Blyss** on **Sept 15, 2022**
-- [Conway's Game of Life](https://www.zama.ai/post/the-game-of-life-rebooted-with-concrete-v0-2) by **Zama** on **Aug 18, 2022**
-- [Lattigo-polls: schedule meeting using Lattigo](https://github.com/ldsec/lattigo-polls-demo) by **Lattigo** on **Sep 2, 2022**
-- [Human action recognition](https://www.nature.com/articles/s41467-022-32168-5) by **Miran Kim; Xiaoqian Jiang; Kristin Lauter;  Elkhan Ismayilzada; Shayan Shams** on **Aug 15, 2022**
-- [Ensuring security of artificial pancreas device system using homomorphic encryption](https://www.sciencedirect.com/science/article/abs/pii/S174680942200516X) by **Haotian Weng; Chirath Hettiarachchi; Christopher Nolan; Hanna Suominen; Artem Lenskiy** on **Jan 15, 2022**
+  <tr>
+    <th style="text-align: center">  <a href="https://www.zama.ai/post/encrypted-image-filtering-using-homomorphic-encryption">Encrypted image filtering <br/> <img src="/resources/cropped.png" width="20"/></a> Feb 23 2023 <br/>  by Zama  </th>
+    <td> <a href="https://www.zama.ai/post/encrypted-image-filtering-using-homomorphic-encryption"> <img src="/resources/image_filtering.png" width="300"/></a> </td>
+  </tr>  
+
+  <tr>
+    <th style="text-align: center"> <a href="https://playground.blyss.dev/passwords">Privaye password checker <br/> <img src="/resources/cropped.png" width="20"/></a> Feb 21 2023 <br/>  by Blyss  </th>
+    <td> <a href="https://playground.blyss.dev/passwords"> <img src=""/></a> </td>
+  </tr>  
+
+  <tr>
+    <th style="text-align: center"> <a href="https://huggingface.co/spaces/zama-fhe/encrypted_sentiment_analysis">Sentiment Analysis On Encrypted Data Using Homomorphic Encryption <br/> <img src="/resources/cropped.png" width="20"/></a> Nov 17 2022 <br/>  by Zama  </th>
+    <td> <a href="https://huggingface.co/spaces/zama-fhe/encrypted_sentiment_analysis"> <img src="/resources/img_1.png" width="300"/></a> </td>
+  </tr>
+
+  <tr>
+    <th style="text-align: center"> <a href="https://btc.usespiral.com/">Private Bitcoin Balance <br/> <img src="/resources/cropped.png" width="20"/></a> Nov 17 2022 <br/>  by Blyss  </th>
+    <td> <a href="https://btc.usespiral.com/"> <img src="" width="300"/></a> </td>
+  </tr>
+  
+  <tr>
+    <th style="text-align: center">  <a href="https://www.zama.ai/post/the-game-of-life-rebooted-with-concrete-v0-2">Conway's Game of Life <br/> <img src="/resources/cropped.png" width="20"/></a> Aug 18 2022 <br/>  by Zama  </th>
+    <td> <a href="https://www.zama.ai/post/the-game-of-life-rebooted-with-concrete-v0-2"> <img src="/resources/zama-network.png" width="300"/></a> </td>
+  </tr>
+
+  <tr>
+    <th style="text-align: center"> <a href="https://github.com/ldsec/lattigo-polls-demo"> Lattigo-polls: schedule meeting using Lattigo <br/> <img src="/resources/cropped.png" width="20"/></a> Sept 2 2022 <br/>  by Miran Kim; Xiaoqian Jiang; Kristin Lauter;  Elkhan Ismayilzada; Shayan Shams  </th>
+    <td> <a href="https://github.com/ldsec/lattigo-polls-demo"> <img src="" width="300"/></a> </td>
+  </tr>
+
+  <tr>
+    <th style="text-align: center"> <a href="https://www.nature.com/articles/s41467-022-32168-5"> Human action recognition <br/> <img src="/resources/cropped.png" width="20"/></a> Aug 15 2022 <br/>  by Lattigo  </th>
+    <td> <a href="https://www.nature.com/articles/s41467-022-32168-5"> <img src="" width="300"/></a> </td>
+  </tr>
+
+  <tr>
+    <th style="text-align: center"> <a href="https://www.sciencedirect.com/science/article/abs/pii/S174680942200516X">Ensuring security of artificial pancreas device system using homomorphic encryption <br/> <img src="/resources/cropped.png" width="20"/></a> Jan 15 2022 <br/>  by Haotian Weng; Chirath Hettiarachchi; Christopher Nolan; Hanna Suominen; Artem Lenskiy  </th>
+    <td> <a href="https://www.sciencedirect.com/science/article/abs/pii/S174680942200516X"> <img src="" width="300"/></a> </td>
+  </tr>
+    
+</table>
+
 
 <!--- Footer --->
 <hr/>
