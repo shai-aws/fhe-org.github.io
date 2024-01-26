@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <!-- Plausible -->
+     <script defer data-domain="fhe.org" src="https://plausible.io/js/script.js"></script>
+    <!-- End of Plausible -->
+     <link rel="shortcut icon" type="image/x-icon" href="https://user-images.githubusercontent.com/5758427/185646241-575e27c5-f0b0-4d4f-9f4f-c9f0c61c24f8.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Fully Homomorphic Encryption | We are a community of researchers and developers interested in advancing homomorphic encryption and other secure computation techniques.</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="Fully Homomorphic Encryption" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="We are a community of researchers and developers interested in advancing homomorphic encryption and other secure computation techniques." />
+<meta property="og:description" content="We are a community of researchers and developers interested in advancing homomorphic encryption and other secure computation techniques." />
+<link rel="canonical" href="https://fhe.org/learn/developer/" />
+<meta property="og:url" content="https://fhe.org/learn/developer/" />
+<meta property="og:site_name" content="Fully Homomorphic Encryption" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Fully Homomorphic Encryption" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"We are a community of researchers and developers interested in advancing homomorphic encryption and other secure computation techniques.","headline":"Fully Homomorphic Encryption","url":"https://fhe.org/learn/developer/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=d74b3f8a87e26b8ae91022c3c84083185300a5ca">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+    <title>FHE.org - Fully Homomorphic Encryption</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.4.0/mermaid.min.js"></script>
+    <script>
+    const config = {
+        startOnLoad:true,
+        theme: 'default',
+        flowchart: {
+            useMaxWidth:false,
+            htmlLabels:true
+            }
+    };
+    $(document).ready(function () {
+      mermaid.initialize(config);
+      window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+    });
+    </script>
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+
+      <!-- Main header navigation -->
+<p align="center">
+  <img width="200" src="https://user-images.githubusercontent.com/5758427/180978488-db825482-5a58-4c7c-9589-c494a6f0be04.png" /><br />
+  <a href="https://fhe-org.github.io">Home</a> | <a href="https://fhe-org.github.io/resources">Resources</a> | <a href="https://fhe-org.github.io/conferences/conference-2024/">Conference 2024</a> | <a href="https://fhe-org.github.io/community">Join the community</a>
+</p>
+<hr />
+
+<!-- /Main header navigation -->
+
+<h2 id="learner-track-developer-">Learner Track: Developer <a href="https://github.com/FHE-org/fhe-org.github.io/blob/main/learn/developer/readme.md"><img src="https://img.shields.io/badge/Edit%20this%20page%20on-Github-lightgrey?style=flat-square" /></a></h2>
+
+<p>This learner track assumes you are a developer wanting to learn about FHE. To see other available Learner Tracks, <a href="../">click here</a>.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+  <li>
+    <h4 id="generalities"><a href="#generalities">Generalities</a></h4>
+    <ul>
+      <li>Ideal Use Cases</li>
+      <li>Threat Model</li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="constraints"><a href="#constraints-1">Constraints</a></h4>
+    <ul>
+      <li>Object Sizes</li>
+      <li>Speed</li>
+      <li>Precision
+        <ul>
+          <li>Input Precision</li>
+          <li>Output Precision</li>
+        </ul>
+      </li>
+      <li>Noise and Bootstrapping</li>
+      <li>Approximation vs Exact Computation</li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="schemes-and-libraries"><a href="#schemes-and-libraries-1">Schemes and Libraries</a></h4>
+    <ul>
+      <li>Table of Libraries</li>
+    </ul>
+  </li>
+  <li>
+    <h4 id="get-started-coding"><a href="#start-coding">Get Started Coding</a></h4>
+    <ul>
+      <li>Working Examples</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br />
+<br /></p>
+
+<h1 id="generalities-1">Generalities</h1>
+
+<p>Fully homomorphic encryption (FHE) allows you to run computations on encrypted data without decrypting it first. As a developer, this means you’re able to write code that doesn’t jeopardize the privacy of your users.</p>
+
+<p>Benefits of using FHE in your applications as a developer can include:</p>
+
+<ul>
+  <li>Demonstrating a commitment to data privacy and security to your users, and enhancing user trust in your application.</li>
+  <li>Improving security by performing computations on cloud data without exposing to potential threats or unauthorized access.</li>
+  <li>Ensuring that sensitive data remains protected even when third-party sharing is a required property of your application</li>
+  <li>Complying with privacy regulations and standards by default</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="ideal-use-cases">Ideal Use Cases</h2>
+
+<p>Homomorphic encryption is ideal for some use cases more than others.</p>
+
+<p><br /></p>
+
+<h3 id="cloud--distributed-computing">Cloud / Distributed Computing</h3>
+
+<table>
+
+
+<tr>
+<td colspan="2">
+FHE enables secure computations on encrypted data stored in the cloud without the need to decrypt it. This preserves the confidentiality of sensitive data even when processed by third-party cloud service providers.
+</td>
+</tr>
+
+<tr>
+<td>Working Examples</td>
+<td>
+
+      <ul>
+        <li><a href="https://github.com/ldsec/lattigo-polls-demo">Lattigo-polls: schedule meeting using Lattigo</a> by <strong>Lattigo</strong> on <strong>Sep 2, 2022</strong></li>
+      </ul>
+
+    </td>
+</tr>
+
+<tr>
+<td>More Reading</td>
+<td>
+
+
+</td>
+</tr>
+</table>
+
+<p><br /></p>
+
+<h3 id="data-analysis-and-actions">Data Analysis and Actions</h3>
+
+<table>
+
+<tr>
+<td colspan="2">
+FHE allows for analysis and performing actions on encrypted data without revealing the actual content analysts. For instance, healthcare providers can conduct statistical analysis on confidential patient information without decrypting it, thus maintaining patient privacy.
+</td>
+</tr>
+
+<tr>
+<td>Working Examples</td>
+<td>
+
+      <ul>
+        <li><a href="https://huggingface.co/spaces/zama-fhe/encrypted_image_filtering">Encrypted image filtering</a> by <strong>Zama</strong> on <strong>Feb 23, 2023</strong></li>
+        <li><a href="https://huggingface.co/spaces/zama-fhe/encrypted_sentiment_analysis">Sentiment analysis over encrypted data</a> by <strong>Zama</strong> on <strong>Nov 17, 2022</strong></li>
+        <li><a href="https://www.zama.ai/post/the-game-of-life-rebooted-with-concrete-v0-2">Conway’s Game of Life</a> by <strong>Zama</strong> on <strong>Aug 18, 2022</strong></li>
+      </ul>
+
+    </td>
+</tr>
+
+<tr>
+<td>More Reading</td>
+<td>
+
+      <ul>
+        <li><a href="https://www.nature.com/articles/s41467-022-32168-5">Human action recognition</a> by <strong>Miran Kim; Xiaoqian Jiang; Kristin Lauter; Elkhan Ismayilzada; Shayan Shams</strong> on <strong>Aug 15, 2022</strong></li>
+        <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S174680942200516X">Ensuring security of artificial pancreas device system using homomorphic encryption</a> by <strong>Haotian Weng; Chirath Hettiarachchi; Christopher Nolan; Hanna Suominen; Artem Lenskiy</strong> on <strong>Jan 15, 2022</strong></li>
+      </ul>
+
+    </td>
+</tr>
+</table>
+
+<p><br /></p>
+
+<h3 id="machine-learning">Machine Learning</h3>
+
+<table>
+
+<tr>
+<td colspan="2">
+FHE enables machine learning models to be trained on encrypted data. This is beneficial when data owners are hesitant to share their data for privacy reasons. With FHE, data remains encrypted during the model training process, and only the encrypted model is shared.
+</td>
+</tr>
+
+<tr>
+<td>Working Examples</td>
+<td>
+
+      <p><em>Have examples to contribute? <a href="https://github.com/FHE-org/fhe-org.github.io/blob/main/learn/developer/readme.md">Add them here!</a></em></p>
+
+    </td>
+</tr>
+
+<tr>
+<td>More Reading</td>
+<td>
+
+</td>
+</tr>
+</table>
+
+<p><br /></p>
+
+<h3 id="accounting--banking">Accounting / Banking</h3>
+
+<table>
+
+<tr>
+<td colspan="2">
+FHE allows financial institutions to analyze encrypted financial transactions for fraud detection while maintaining client confidentiality.
+</td>
+</tr>
+
+<tr>
+<td>Working Examples</td>
+<td>
+
+      <ul>
+        <li><a href="https://btc.usespiral.com/">Private bitcoin balance</a> by <strong>Blyss</strong> on <strong>Sept 15, 2022</strong></li>
+      </ul>
+
+    </td>
+</tr>
+
+<tr>
+<td>More Reading</td>
+<td>
+
+</td>
+</tr>
+</table>
+
+<p><br /></p>
+
+<h3 id="blind-and-private-databases">Blind and Private Databases</h3>
+
+<table>
+
+<tr>
+<td colspan="2">
+FHE allows encrypted search and querying of databases without exposing search criteria or database contents, thus ensuring privacy for data owners who want to allow others to search and access information.
+</td>
+</tr>
+
+<tr>
+<td>Working Examples</td>
+<td>
+
+      <p><strong>Working Examples</strong></p>
+
+      <ul>
+        <li><a href="https://www.zama.ai/post/encrypted-key-value-database-using-homomorphic-encryption">Encrypted Key-value Database using FHE</a> by <strong>Zama</strong> on <strong>Mar 16, 2023</strong>
+<!-- markdown-link-check-disable-next-line --></li>
+        <li><a href="https://playground.blyss.dev/passwords">Private password checker</a> by <strong>Blyss</strong> on <strong>Feb 21, 2023</strong> [Requires sign-up]</li>
+        <li><a href="https://btc.usespiral.com/">Private bitcoin balance</a> by <strong>Blyss</strong> on <strong>Sept 15, 2022</strong></li>
+      </ul>
+
+    </td>
+</tr>
+
+<tr>
+<td>More Reading</td>
+<td>
+
+</td>
+</tr>
+</table>
+
+<p><br /></p>
+
+<h2 id="threat-model">Threat model</h2>
+
+<p>Homomorphic encryption is not a silver bullet for all use cases. As with all cryptography, how practical or safe it is to use is ultimately dependent on the use case, implementation, library, and underlying scheme.</p>
+
+<p><br />
+<br /></p>
+
+<table>
+<tr>
+<td>Encryption Strength</td>
+<td>The security of homomorphic encryption relies on the strength of the underlying encryption scheme. If the encryption scheme is compromised or broken, the encrypted data and computations could be exposed.</td>
+</tr>
+
+<tr>
+<td>Implementation Flaws</td>
+<td>Like any cryptographic system, the implementation of homomorphic encryption algorithms and protocols may introduce vulnerabilities. Implementation flaws, such as programming errors or side-channel attacks, could potentially compromise the security of the encrypted data. It's important to have your code audited, use libraries that are audited, and also schemes that have been publicly tested and accepted by the community as safe.</td>
+</tr>
+
+<tr>
+<td>Metadata Leakage</td>
+<td>While homomorphic encryption protects the content of the data, it does not hide the metadata associated with the encrypted computations. Metadata leakage could enable attackers to infer information about the encrypted data, such as its size, access patterns, or the type of computations being performed.</td>
+</tr>
+
+<tr>
+<td>Key Management</td>
+<td>Homomorphic encryption schemes typically require the management of encryption keys. Adequate key management practices, including key generation, distribution, storage, and revocation, are crucial to maintaining the security of the encrypted data.</td>
+</tr>
+
+</table>
+
+<p><br /></p>
+
+<p><strong>More Reading</strong></p>
+
+<ul>
+  <li><a href="https://www.zama.ai/post/fhe-as-a-puzzle-piece">FHE as a Puzzle Piece</a> by <strong>Nigel Smart</strong> on <strong>Jan 5, 2023</strong></li>
+</ul>
+
+<p><br />
+<br /></p>
+
+<p><br />
+<br /></p>
+
+<table align="center">
+<tr>
+<td><a href="#table-of-contents">Back to top</a></td>
+</tr>
+</table>
+
+<p><br />
+<br /></p>
+
+<!-- Constraints section -->
+
+<h1 id="constraints-1">Constraints</h1>
+
+<p>There are several constraints regarding the implementation of homomorphic encryption-based solutions. Each of these constraints needs to be considered carefully when implementing an FHE-based solution.</p>
+
+<h3 id="choosing-parameters">Choosing Parameters</h3>
+
+<table>
+<tr>
+<td colspan="1">
+The target homomorphic encryption scheme needs to be initialized with parameters which are used throughout the computation. These parameters determine everything performance related: the security level, the efficiency of homomorphic operations, the size of key material, the input (and output) precision, how noise grows throughout the computation, and when a special operation called bootstrapping needs to be performed. We consider each of these issues below, one-by-one.
+</td>
+</tr>
+</table>
+<p><br /></p>
+
+<pre><code class="language-mermaid">---
+title: A Competing Trade-off of Constraints
+---
+flowchart TB
+    Speed &lt;--&gt; Precision
+    Speed &lt;--&gt; Security
+		Speed &lt;--&gt; ObjectSizes
+		Speed &lt;--&gt; Noise
+    Noise &lt;--&gt; Precision
+    Noise &lt;--&gt; Security
+		Noise &lt;--&gt; ObjectSizes
+		ObjectSizes &lt;--&gt; Security
+		ObjectSizes &lt;--&gt; Precision
+		Precision &lt;--&gt; Security
+
+</code></pre>
+
+<h2 id="approximate-vs-exact-computation">Approximate vs Exact computation</h2>
+
+<table>
+<tr>
+<td colspan="2">
+FHE schemes can be categorised in many ways. One of the most important distrinctions is whether an FHE scheme is <b>exact</b> or <b>approximate</b>. In the first case computations are typically considered over the integers and correctness of output is guaranteed. In the latter case, a small error is incurred during computation, so that the output of a homomorphic function evaluation, such as computing `f(x)`, contains a small error: `f(x) + e`.
+</td>
+</tr>
+</table>
+<p><br /></p>
+
+<h2 id="input-precision">Input Precision</h2>
+
+<table>
+
+<tr>
+<td colspan="2">
+FHE schemes typically work over restricted input domains (for example: the integers modulo `p`). This means that when implementing an algorithm in FHE, it is important to consider whether the algorithm needs to be adapted to work over this domain. As an example, consider the `max()` function on real numbers: suppose that we want to compute the max of 0.001 and 8.764. Certain FHE schemes work modulo `p` (as mentioned above), so the first step is to figure out how to map our inputs, and the respective max algorithm, into this modular domain.
+</td>
+</tr>
+
+<tr>
+<td>Further Reading</td>
+<td>
+
+      <ul>
+        <li><a href="https://docs.zama.ai/concrete-ml/advanced-topics/quantization">Quantization</a> by <strong>Zama</strong> in <strong>2023</strong>.</li>
+      </ul>
+
+    </td>
+</tr>
+</table>
+<p><br /></p>
+
+<h2 id="output-precision">Output Precision</h2>
+<table>
+<tr>
+<td colspan="2">
+For approximate schemes, such as CKKS, the homomorphic encryption scheme carries an implicit error which impacts the message. The parameters can be adapted to guarantee a specific output precision, but this is important to note when considering implementing solutions in CKKS.
+</td>
+</tr>
+
+<tr>
+<td>Further Reading</td>
+<td>
+
+      <ul>
+        <li>Part 2 of a <a href="https://blog.openmined.org/ckks-explained-part-2-ckks-encoding-and-decoding/">blog series on CKKS</a> by <strong>Daniel Huynh (OpenMined)</strong> in <strong>2020</strong>.</li>
+        <li>Introduction to CKKS (Approximate Homomorphic Encryption) <a href="https://www.youtube.com/watch?v=iQlgeL64vfo">video</a> by <strong>Yongsoo Song (SNU)</strong> in <strong>2020</strong>.</li>
+      </ul>
+    </td>
+</tr>
+</table>
+<p><br /></p>
+
+<h2 id="speed">Speed</h2>
+
+<table>
+<tr>
+<td colspan="2">
+The speed of FHE-based operations is constantly improving. However, there is still a large slow-down compared to plaintext operations, and it is important to consider this when getting started. There are a variety of open-soruce implementations of various algorithims implemented in FHE, and looking at benchmarks for these applications can give a good indication of where FHE is at.
+</td>
+</tr>
+<tr>
+<td>Further Reading</td>
+<td>
+
+      <ul>
+        <li><a href="https://docs.zama.ai/tfhe-rs/getting-started/benchmarks">tfhe-rs benchmarks</a> by <strong>Zama</strong> in <strong>2023</strong>.</li>
+        <li>Slide deck containing <a href="https://github.com/snucrypto/HEAAN/blob/master/slide-HEAAN.pdf">HEAAN benchmarks</a> by <strong>SNU</strong> in <strong>2018</strong>.</li>
+        <li>Demo paper containing <a href="https://homomorphicencryption.org/wp-content/uploads/2020/12/wahc20_demo_christian.pdf">Lattigo benchmars</a> by <strong>Mouchet et al.</strong> in <strong>2020</strong>.</li>
+      </ul>
+    </td>
+</tr>
+</table>
+<p><br /></p>
+
+<h2 id="object-sizes">Object Sizes</h2>
+
+<table>
+<tr>
+<td colspan="2">
+When data is encrypted using an FHE scheme, there is an expansion factor which needs to be considered. As an example, in the TFHE scheme, to encrypt somewhere in the order of 1-8 bits, a ciphertext will be of size 5 kilobytes. Evaluation keys, which are required for the server to carry out homomorphic operations over ciphertexts, can be very large. In particular, all evaluation keys stored on the server are just collections of ciphertexts, and can be in the order of tens of megabytes (or even over a gigabyte, in certain cases). This means that there is a high bandwidth requirement on FHE-based solutions.
+</td>
+</tr>
+</table>
+<p><br /></p>
+
+<h2 id="noise-and-bootstrapping">Noise and Bootstrapping</h2>
+
+<table>
+<tr>
+<td colspan="2">
+As homomorphic operations are being computed, the level of noise contained in the utilised ciphertext grows. The noise level must not be allowed to overflow a specific bound, or errors can be introduced into computations. The process used to clear this noise is called bootstrapping, and, depending on the scheme, has a varying level of efficiency.
+</td>
+</tr>
+<tr>
+<td>Further Reading</td>
+<td>
+
+      <ul>
+        <li>A <a href="https://www.zama.ai/post/what-is-bootstrapping-homomorphic-encryption">blogpost</a> on bootstrapping by <strong>Nigel Smart (Zama)</strong> in <strong>2023</strong>.</li>
+        <li>A <a href="https://dualitytech.com/blog/bootstrapping-in-fully-homomorphic-encryption-fhe/">blogpost</a> on bootstrapping by <strong>Yuriy Polyakov and Ahmad Al Badawi (Duality)</strong> in <strong>2023</strong>.</li>
+      </ul>
+    </td>
+</tr>
+</table>
+<p><br /></p>
+
+<h2 id="security">Security</h2>
+
+<table>
+<tr>
+<td colspan="2">
+It is important that the homomorphic encryption scheme is parameterised correctly to ensure a sufficient level of security. The security is related a problem called Learning with Errors, and we need to choose cryptographic parameters such that this problem is hard to solve. Luckily, there are many FHE-based tools which take the problem of parameter selection away from the user. Moreover, most FHE libraries typically have default parameter sets for which the security level has already been determined.
+</td>
+</tr>
+<tr>
+<td>Further Reading</td>
+<td>
+
+      <ul>
+        <li>Wikipedia <a href="https://en.wikipedia.org/wiki/Learning_with_errors">page</a> on the Learning with Errors problem.</li>
+        <li>Stackexchange <a href="https://crypto.stackexchange.com/questions/47432/what-does-it-mean-the-security-parameter-for-a-fhe-scheme">answer</a> to: What is a security parameter?</li>
+        <li>A <a href="https://www.zama.ai/post/estimating-the-security-of-homomorphic-schemes">blogpost</a> on estimating the security of FHE schemes by <strong>Zama</strong> in <strong>2021</strong>.</li>
+        <li>Taking the problem out of the hands of the user: Zama’s <a href="https://github.com/zama-ai/concrete/tree/main/tools/parameter-curves">security curves implementation</a> by <strong>Zama</strong> in <strong>2023</strong>.</li>
+      </ul>
+    </td>
+</tr>
+</table>
+
+<p><br />
+<br /></p>
+
+<p><br />
+<br /></p>
+
+<table align="center">
+<tr>
+<td><a href="#table-of-contents">Back to top</a></td>
+</tr>
+</table>
+
+<p><br />
+<br /></p>
+
+<!--Schemes and libraries section-->
+
+<h1 id="schemes-and-libraries-1">Schemes and Libraries</h1>
+
+<h2 id="schemes">Schemes</h2>
+<table>
+<tr>
+<td colspan="2">
+
+Schemes are the mathematical algorithms that are used for the underlying FHE operations on data. There are several major schemes implemented in modern libraries, each taking a different approach that has their own benefits and drawbacks on what types of operations can be done, the depth of calculations, and the resulting latency.
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+
+      <ul>
+        <li><a href="https://eprint.iacr.org/2012/144">BFV</a> by <strong>Fan Junfeng; Vercauteren Frederik</strong></li>
+        <li><a href="https://eprint.iacr.org/2011/277">BGV</a> by <strong>Z. Brakerski; C. Gentry, V. Vaikuntanathan</strong></li>
+        <li><a href="https://link.springer.com/chapter/10.1007/978-3-319-70694-8_15">CKKS</a> by <strong>Cheon Jung Hee; Kim Andrey; Kim Miran; Song Yongsoo</strong></li>
+        <li><a href="https://github.com/lducas/FHEW">FHEW</a> by <strong>Leo Ducas; Daniele Micciancio</strong></li>
+        <li><a href="https://tfhe.github.io/tfhe/">TFHE</a> by <strong>Ilaria Chillotti; Nicolas Gama; Mariya Georgieva; Malika Izabachene</strong></li>
+      </ul>
+
+    </td>
+</tr>
+
+</table>
+
+<p><br /></p>
+
+<h2 id="libraries">Libraries</h2>
+
+<table>
+<tr>
+<td colspan="2">
+
+Libraries are the software developers use to perform FHE operations easily, similarly to how one might use the `libsodium` library for basic cryptographic operations. Each library is designed for working with different schemes, some with multiple schemes and the ability to switch between them as needed.
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+
+      <ul>
+        <li><a href="https://github.com/zama-ai/concrete">Concrete</a> - TFHE Compiler that converts python programs into FHE equivalent by <strong>Zama</strong></li>
+        <li><a href="https://github.com/zama-ai/concrete-ml">Concrete ML</a> - Privacy Preserving ML framework built on top of Concrete by <strong>Zama</strong></li>
+        <li><a href="https://heaan.it/">HEaaN</a> - C++ FHE library implementing CKKS scheme that supports bootstrapping and GPU-acceleration by <strong>Crypto Lab</strong></li>
+        <li><a href="https://github.com/HomEnc/HElib">HElib</a> - BGV scheme with bootstrapping and the Approximate Number CKKS scheme by <strong>IBM</strong></li>
+        <li><a href="https://github.com/ldsec/lattigo">Lattigo</a> - Lattice-based multiparty homomorphic encryption library in Go by <strong>Tune Insight</strong></li>
+        <li><a href="https://github.com/openfheorg/openfhe-development">OpenFHE</a> - Production-ready implementations of all major FHE schemes by <strong>Duality Tech</strong></li>
+        <li><a href="https://github.com/microsoft/SEAL">SEAL</a> - C++ FHE library implementing BFV and CKKS schemes by <strong>Microsoft</strong></li>
+        <li><a href="https://github.com/zama-ai/tfhe-rs/">TFHE-rs</a> - A pure Rust implementation of TFHE for booleans and small integer arithmetics over encrypted data by <strong>Zama</strong></li>
+      </ul>
+
+    </td>
+</tr>
+
+</table>
+
+<p><br /></p>
+
+<h2 id="choosing-the-right-schemelibrary">Choosing the right scheme/library</h2>
+
+<p>Choosing which library/scheme is right for you can be confusing at first, but here are some considerations that help in the decision making process:</p>
+
+<ul>
+  <li>What data types will you working with? (Large integers? Small integers / Booleans? Real / Complex values?)</li>
+  <li>How parralelizable is your workflow?</li>
+  <li>How deep are your typical calculations?</li>
+  <li>What performance requirements do you have?</li>
+  <li>How easy do you need implementation to be?</li>
+  <li>How much existing code / support will you need?</li>
+</ul>
+
+<p><i>In the following section, you’ll have a chance to use existing sample code and write your own code. If at that point you’re still unsure which library is right for you or have deeper questions about it the libraries and schemes, consider joining the <a href="https://discord.fhe.org">FHE.org community on Discord</a> and asking the community directly. We’re here to help!</i></p>
+
+<p><br />
+<br /></p>
+
+<p><br />
+<br /></p>
+
+<table align="center">
+<tr>
+<td><a href="#table-of-contents">Back to top</a></td>
+</tr>
+</table>
+
+<p><br />
+<br /></p>
+
+<!--Start coding section-->
+
+<h1 id="start-coding">Start Coding</h1>
+
+<p>The best way to get started in FHE is to look at Tutorials. In particular: trying to read them, understand the code, and then extend the examples with your own code.</p>
+
+<p>Below is a list of all resources from Tutorials and Examples found on various libraries repositories and some diagram to let you pick
+one library to start with. Note that every libraries have their own capabilities that are not covered here.</p>
+
+<h2 id="select-an-fhe-library">Select an FHE library</h2>
+
+<h3 id="by-language">By Language</h3>
+
+<pre><code class="language-mermaid">stateDiagram
+	Prog_lang: Where to start
+    Prog_lang: by language
+    Prog_lang --&gt; C++
+    Prog_lang --&gt; Rust
+    Prog_lang --&gt; Go
+    Prog_lang --&gt; Python
+	C++ --&gt; OpenFHE
+	C++ --&gt; SEAL
+    C++ --&gt; HEAAN
+    C++ --&gt; HELIB
+	Go --&gt; LattiGo
+	TFHErs: TFHE-rs
+	Rust --&gt; TFHErs
+	Python --&gt; pyFHEL
+	Python --&gt; Concrete
+</code></pre>
+
+<h3 id="by-scheme">By Scheme</h3>
+
+<pre><code class="language-mermaid">stateDiagram
+    Scheme: Where to start
+    Scheme: by FHE scheme
+    Scheme --&gt; BFV
+    Scheme --&gt; BGV
+    Scheme --&gt; CKKS
+    Scheme --&gt; TFHE
+    BFV --&gt; OpenFHE
+    BGV --&gt; OpenFHE
+    CKKS --&gt; OpenFHE
+    TFHE --&gt; OpenFHE
+    BFV --&gt; SEAL
+    BGV --&gt; SEAL
+    CKKS --&gt; SEAL
+    TFHE --&gt; Concrete
+    TFHErs: TFHE-rs
+    TFHE --&gt; TFHErs
+</code></pre>
+
+<h2 id="tutorials">Tutorials</h2>
+
+<p>Here is a list of examples and tutorials from each libraries, with some keywords (prefixed with a #) to highlight the language, library, scheme and category they belong to.</p>
+
+<h3 id="concrete">Concrete</h3>
+
+<ul>
+  <li>Table Lookup #Python #concrete #tfhe #tutorial
+<a href="https://docs.zama.ai/concrete/tutorials/table_lookups">view</a></li>
+  <li>Rounded Table Lookup #Python #concrete #tfhe #tutorial
+<a href="https://docs.zama.ai/concrete/tutorials/rounding">view</a></li>
+  <li>TFHE floating points #Python #concrete #tfhe #tutorial
+<a href="https://docs.zama.ai/concrete/tutorials/floating_points">view</a></li>
+  <li>Encrypted Key value database #Python #concrete #tfhe #application
+<a href="https://docs.zama.ai/concrete/application-tutorials/key_value_database">view</a></li>
+  <li>Client Server deployment #Python #concrete #tfhe #deployment
+<a href="https://docs.zama.ai/concrete/how-to/deploy">view</a></li>
+</ul>
+
+<h3 id="lattigo">Lattigo</h3>
+
+<p><i>This section is pending updates to the links.</i></p>
+
+<ul>
+  <li>A Privacy-Preserving yet Accountable Ride-Hailing Service #Go #lattigo #BFV #application
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/bfv/main.go) --></li>
+  <li>CKKS Lookup Table #ckks #Go #lattigo #tutorial
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/ckks/advanced/lut/main.go) --></li>
+  <li>CKKS Bootstrapping #ckks #Go #lattigo #tutorial
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/ckks/bootstrapping/main.go) --></li>
+  <li>Euler #ckks #Go #lattigo #tutorial
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/ckks/euler/main.go) --></li>
+  <li>Function evaluation #ckks #Go #lattigo #tutorial
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/ckks/polyeval/main.go) --></li>
+  <li>Private Information Retrieval example #bfv #Go #lattigo #application
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/dbfv/pir/main.go) --></li>
+  <li>Private Set intersection example #bfv #Go #lattigo #application
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/dbfv/psi/main.go) --></li>
+  <li>TFHE Lookup Table #tfhe #Go #lattigo #tutorial
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/rgsw/main.go) --></li>
+  <li>Vectorized oblivious evaluation #Go #lattigo #application
+<!-- [view](https://github.com/tuneinsight/lattigo/blob/master/examples/ring/vOLE/main.go) --></li>
+</ul>
+
+<h3 id="heaan">HEAAN</h3>
+
+<ul>
+  <li>Get started #C++ #HEAAN #ckks # tutorial
+<a href="https://github.com/snucrypto/HEAAN/blob/master/README.md">view</a></li>
+</ul>
+
+<h3 id="helib">HELIB</h3>
+
+<ul>
+  <li>CKKS basics #C++ #HELIB #ckks #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/tutorial/01_ckks_basics.cpp">view</a></li>
+  <li>CKKS depth #C++ #HELIB #ckks #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/tutorial/02_ckks_depth.cpp">view</a></li>
+  <li>CKKS data movement #C++ #HELIB #ckks #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/tutorial/03_ckks_data_movement.cpp">view</a></li>
+  <li>CKKS matrix multiplication #C++ #HELIB #ckks #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/tutorial/04_ckks_matmul.cpp">view</a></li>
+  <li>CKKS multiplication #C++ #HELIB #ckks #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/tutorial/05_ckks_multlowlvl.cpp">view</a></li>
+  <li>CKKS serialization #C++ #HELIB #ckks #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/tutorial/07_ckks_serialization.cpp">view</a></li>
+  <li>CKKS deserialization #C++ #HELIB #ckks #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/tutorial/08_ckks_deserialization.cpp">view</a></li>
+  <li>BGV Binary arithmetic #C++ #HELIB #bgv #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/BGV_binary_arithmetic/BGV_binary_arithmetic.cpp">view</a></li>
+  <li>Privacy Preserving search against an encrypted database / Country lookup #C++ #HELIB #bgv #application
+<a href="https://github.com/homenc/HElib/blob/master/examples/BGV_country_db_lookup/README.md">view</a></li>
+  <li>BGV Packed arithmetic #C++ #HELIB #bgv #tutorial
+<a href="https://github.com/homenc/HElib/blob/master/examples/BGV_packed_arithmetic/BGV_packed_arithmetic.cpp">view</a></li>
+</ul>
+
+<h3 id="openfhe">OpenFHE</h3>
+
+<ul>
+  <li>FHE for arithmetic over integers #C++ #openfhe #bfv #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/simple-integers.cpp">view</a></li>
+  <li>FHE for arithmetic over integers #C++ #openfhe #bgv #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/simple-integers-serial-bgvrns.cpp">view</a></li>
+  <li>FHE for arithmetic over real numbers #C++ #openfhe #ckks #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/simple-real-numbers.cpp">view</a></li>
+  <li>advanced arithmetic over real numbers #C++ #openfhe #ckks #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/advanced-real-numbers.cpp">view</a>
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/advanced-real-numbers-128.cpp">next</a></li>
+  <li>Arbitrary Smooth Function Evaluation #C++ #openfhe #ckks #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/function-evaluation.cpp">view</a></li>
+  <li>Simple CKKS Bootstrapping Example #C++ #openfhe #ckks #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/simple-ckks-bootstrapping.cpp">view</a></li>
+  <li>Advanced CKKS Bootstrapping Example #C++ #openfhe #ckks #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/advanced-ckks-bootstrapping.cpp">view</a></li>
+  <li>Double-Precision (Iterative) Bootstrapping Example #C++ #openfhe #ckks #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/iterative-ckks-bootstrapping.cpp">view</a></li>
+  <li>FHE for Boolean circuits and larger plaintext spaces #C++ #openfhe #tfhe #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/binfhe/examples/boolean.cpp">view</a>
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/binfhe/examples/boolean-serial-json.cpp">next</a>
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/binfhe/examples/boolean-serial-binary.cpp">next</a></li>
+  <li>Large-Precision Comparison #C++ #openfhe #tfhe #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/binfhe/examples/eval-sign.cpp">view</a></li>
+  <li>Small-Precison Arbitrary Function Evaluation #C++ #openfhe #tfhe #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/binfhe/examples/eval-function.cpp">view</a></li>
+  <li>Threshold FHE #C++ #openfhe #threshold #bgv #bfv #ckks #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/threshold-fhe.cpp">view</a></li>
+  <li>Threshold FHE with 5 parties #C++ #openfhe #threshold #bfv #tutorial
+<a href="https://github.com/openfheorg/openfhe-development/blob/main/src/pke/examples/threshold-fhe-5p.cpp">view</a></li>
+</ul>
+
+<h3 id="pyfhel">PyFHEL</h3>
+
+<ul>
+  <li>Integer Demo with BFV #python #PyFHEL #bfv #tutorial
+<a href="https://github.com/ibarrond/Pyfhel/blob/master/examples/Demo_2_Integer_BFV.py">view</a></li>
+  <li>Fixed-point FHE with CKKS scheme #python #PyFHEL #bfv #tutorial
+<a href="https://github.com/ibarrond/Pyfhel/blob/master/examples/Demo_3_Float_CKKS.py">view</a></li>
+  <li>Saving and Restoring objects #python #PyFHEL #tutorial
+<a href="https://github.com/ibarrond/Pyfhel/blob/master/examples/Demo_4_SaveNRestore.py">view</a></li>
+  <li>Client/Server demo #python #PyFHEL #deployment
+<a href="https://github.com/ibarrond/Pyfhel/blob/master/examples/Demo_5_CS_Client.py">view</a></li>
+  <li>Multiplication Depth with Integers and Noise budget #python #PyFHEL #bfv #ckks #tutorial
+<a href="https://github.com/ibarrond/Pyfhel/blob/master/examples/Demo_6_MultDepth.py">view</a></li>
+  <li>Scalar product #python #PyFHEL #bfv #ckks #tutorial
+<a href="https://github.com/ibarrond/Pyfhel/blob/master/examples/Demo_6_MultDepth.py">view</a></li>
+  <li>Hamming distance #python #pyFHEL #bfv #application
+<a href="https://github.com/ibarrond/Pyfhel/blob/master/examples/Demo_8_HammingDist.py">view</a></li>
+</ul>
+
+<h3 id="seal">SEAL</h3>
+
+<ul>
+  <li>Encrypted modular arithmetic using the BFV scheme #C++ #Seal #bfv #tutorial
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/1_bfv_basics.cpp">view</a></li>
+  <li>Encoding more complex data into Microsoft SEAL plaintext objects #C++ #Seal #tutorial
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/2_encoders.cpp">view</a></li>
+  <li>Introduces the concept of levels; prerequisite for using the CKKS scheme #C++ #Seal #ckks #tutorial
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/3_levels.cpp">view</a></li>
+  <li>Encrypted modular arithmetic using the BGV scheme #C++ #Seal #bgv #tutorial
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/4_bgv_basics.cpp">view</a></li>
+  <li>Encrypted real number arithmetic using the CKKS scheme #C++ #Seal #ckks #tutorial
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/5_ckks_basics.cpp">view</a></li>
+  <li>Performing cyclic rotations on encrypted vectors in the BFV and CKKS schemes #C++ #Seal #bfv #ckks #tutorial
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/6_rotation.cpp">view</a></li>
+  <li>Serializing objects in Microsoft SEAL #C++ #Seal #tutorial
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/7_serialization.cpp">view</a></li>
+  <li>Performance tests #C++ #Seal #benchmark
+<a href="https://github.com/microsoft/SEAL/blob/main/native/examples/8_performance.cpp">view</a></li>
+</ul>
+
+<h3 id="tfhe-rs">TFHE-rs</h3>
+
+<ul>
+  <li>Integer operations #Rust #tfhe-rs #tfhe #tutorial
+<a href="https://docs.zama.ai/tfhe-rs/fine-grained-apis/integer/operations">view</a></li>
+  <li>Integer Serialization/Deserialization
+<a href="https://docs.zama.ai/tfhe-rs/fine-grained-apis/integer/serialization">view</a></li>
+  <li>Boolean operations #Rust #tfhe-rs #tfhe #tutorial
+<a href="https://docs.zama.ai/tfhe-rs/fine-grained-apis/boolean/operations">view</a></li>
+  <li>Boolean serialization #Rust #tfhe-rs #tfhe #tutorial
+<a href="https://docs.zama.ai/tfhe-rs/fine-grained-apis/boolean/serialization">view</a></li>
+  <li>C-API #C #tfhe-rs #tfhe #tutorial
+<a href="https://docs.zama.ai/tfhe-rs/how-to/c_api">view</a></li>
+  <li>WASM-API #JS #tfhe-rs #tfhe #tutorial
+<a href="https://docs.zama.ai/tfhe-rs/how-to/js_on_wasm_api">view</a></li>
+  <li>FHE SHA256 #Rust #tfhe-rs #tfhe #tutorial
+<a href="https://github.com/zama-ai/tfhe-rs/blob/main/tfhe/docs/application_tutorials/sha256_bool.md">view</a></li>
+  <li>Encrypted Regular Expression engine #Rust #tfhe-rs #tfhe #application
+<a href="https://github.com/zama-ai/tfhe-rs/blob/main/tfhe/docs/application_tutorials/regex.md">view</a></li>
+  <li>Dark Market in FHE #Rust #tfhe-rs #tfhe #application
+<a href="https://github.com/zama-ai/tfhe-rs/blob/main/tfhe/docs/application_tutorials/dark_market.md">view</a></li>
+</ul>
+
+<p><br />
+<br /></p>
+
+<p><br />
+<br /></p>
+
+<table align="center">
+<tr>
+<td><a href="#table-of-contents">Back to top</a></td>
+</tr>
+</table>
+
+<p><br />
+<br /></p>
+
+<p><br />
+<br /></p>
+
+<!--- Footer --->
+<hr />
+
+<p>💙 This website is a resource provided and contributed by the FHE.org community and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. We welcome any contributions to this website! Read the <a href="https://fhe-org.github.io/contrib">contribution guidelines</a> first and simply open a PR on the <a href="https://github.com/fhe-org/fhe-org">Github repo</a> to add your resources.</p>
+
+
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  </body>
+</html>
